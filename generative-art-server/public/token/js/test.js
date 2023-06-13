@@ -928,508 +928,612 @@ const makeLxD = function () {
           ])
         : wc([bgrndNws, 0.9, bgrndDBlue, 0.07, pppGrn, 0.03]);
     },
-    pcRad = function () {
-      return wc([
-        wht,
-        0.6,
-        dRed,
-        0.05,
-        red,
-        0.02,
-        nwsprnt,
-        0.05,
-        orng,
-        0.05,
-        pYllw,
-        0.05,
-        yllw,
-        0.03,
-        ppGrn,
-        0.01,
-        blue,
-        0.01,
-        pBlue,
-        0.04,
-        brwn,
-        0.09,
-      ]);
-    },
-    pbcRad = function () {
-      return bgrndNws;
-    },
-    pcBaked = function () {
-      return wc([
-        wht,
-        0.2,
-        pnk,
-        0.05,
-        pPnk,
-        0.1,
-        xGrn,
-        0.5,
-        ppYllwGrn,
-        0.1,
-        pBrwn,
-        0.05,
-      ]);
-    },
-    pbcBaked = function () {
-      return bgrndNws;
-    },
-    pcCool = function () {
-      return wc([
-        nwsprnt,
-        0.13,
-        pYllw,
-        0.01,
-        lavender,
-        0.03,
-        grn,
-        0.1,
-        pppGrn,
-        0.04,
-        ppGrn,
-        0.04,
-        ddBlue,
-        0.11,
-        dBlue,
-        0.15,
-        blue,
-        0.25,
-        pBlue,
-        0.1,
-        brwn,
-        0.01,
-        dBrwn,
-        0.04,
-        ddBrwn,
-        0.02,
-      ]);
-    },
-    pbcCool = function (a) {
-      return a >= V6
-        ? wc([bgrndNws, 0.5, bgrndDBlue, 0.3, pnk, 0.15, blue, 0.05])
-        : wc([bgrndNws, 0.8, bgrndDBlue, 0.12, blue, 0.06, pPnk, 0.02]);
-    },
-    pcBlack = function () {
-      return wc([bgrndNws, 0.15, blk, 0.85]);
-    },
-    pbcBlack = function () {
-      return bgrndNws;
-    },
-    pcPolitique = function () {
-      return wc([wht, 0.58, dRed, 0.02, pYllw, 0.2, pnk, 0.15, blue, 0.05]);
-    },
-    pbcPolitique = function (a) {
-      return a >= V6
-        ? wc([bgrndNws, 0.5, ppBlue, 0.5])
-        : wc([bgrndNws, 0.8, ppBlue, 0.2]);
-    },
-    pcRetro = function () {
-      return wc([
-        dRed,
-        0.07,
-        red,
-        0.03,
-        pOrng,
-        0.05,
-        pYllw,
-        0.02,
-        yllw,
-        0.15,
-        brwn,
-        0.1,
-        dBrwn,
-        0.58,
-      ]);
-    },
-    pbcRetro = function () {
-      return wc([nwsprnt, 0.7, pBlue, 0.2, wht, 0.1]);
-    },
-    pcWhtMono = function () {
-      return wht;
-    },
-    pbcWhtMono = function () {
-      return wc([
-        dRed,
-        0.1,
-        red,
-        0.1,
-        nwsprnt,
-        0.01,
-        orng,
-        0.1,
-        pYllw,
-        0.04,
-        yllw,
-        0.05,
-        pnk,
-        0.1,
-        grn,
-        0.1,
-        ddBlue,
-        0.1,
-        dBlue,
-        0.1,
-        blue,
-        0.1,
-        dBrwn,
-        0.02,
-        ddBrwn,
-        0.02,
-        blk,
-        0.09,
-      ]);
-    },
-    pcAM = function () {
-      return wc([
-        [260, 20, 20],
-        0.77,
-        [240, 30, 35],
-        0.03,
-        [300, 10, 50],
-        0.05,
-        [180, 20, 30],
-        0.06,
-        [130, 20, 70],
-        0.05,
-        [5, 10, 80],
-        0.02,
-        [5, 40, 90],
-        0.01,
-        [40, 25, 90],
-        0.01,
-      ]);
-    },
-    pbcAM = function () {
-      return [260, 30, 30];
-    },
-    pcDarkLifestyle = function () {
-      return wc([
-        [0, 0, 13],
-        0.2,
-        [0, 0, 16],
-        0.48,
-        [0, 0, 19],
-        0.2,
-        [0, 0, 22],
-        0.1,
-        [0, 0, 25],
-        0.02,
-      ]);
-    },
-    pbcDarkLifestyle = function () {
-      return [0, 0, 10];
-    },
-    pcPartyGirl = function () {
-      return [350, gssn(65, 4), gssn(85, 4)];
-    },
-    pbcPartyGirl = function () {
-      return [225, 70, 20];
-    },
-    pcWhtOnCrm = function () {
-      return wht;
-    },
-    pbcWhtOnCrm = function () {
-      return bgrndNws;
-    },
-    pcGolfSocks = function () {
-      return wc([
-        bgrndNws,
-        0.41,
-        [210, 72, 45],
-        0.15,
-        [210, 72, 30],
-        0.05,
-        [0, 40, 95],
-        0.07,
-        [6, 20, 95],
-        0.05,
-        [130, 50, 30],
-        0.2,
-        [32, 30, 99],
-        0.04,
-        [32, 30, 30],
-        0.03,
-      ]);
-    },
-    pbcGolfSocks = function () {
-      return [130, 20, 50];
-    },
-    pcRose = function () {
-      return wc([
-        [150, 8, 40],
-        0.5,
-        [160, 12, 25],
-        0.05,
-        [350, 60, 90],
-        0.05,
-        [350, 45, 80],
-        0.05,
-        [350, 80, 70],
-        0.05,
-        [6, 16, 100],
-        0.2,
-        [15, 26, 97],
-        0.1,
-      ]);
-    },
-    pbcRose = function () {
-      return [150, 8, 30];
-    },
-    pMnCl = function (a, b, e, f) {
-      let g = a();
-      if (f || e < w(0.015)) return g;
-      for (; g === b; ) g = a();
-      return g;
-    };
 
 
-  function draw() {
-    noLoop(), background(40, 10, 90);
-    let a = wc([
-        V1,
-        0.03,
-        V2,
-        0.01,
-        V3,
-        0.04,
-        V5,
-        0.18,
-        V6,
-        0.5,
-        V7,
-        0.04,
-        V4,
-        0.2,
-      ]),
-      b = wc(["none", 0.15, "low", 0.2, "med", 0.45, "high", 0.2]);
-    V7 === a && (b = wc(["none", 0.4, "low", 0.3, "med", 0.3]));
-    const c = wc([
-        pi(0.5),
-        0.1,
-        pi(0),
-        0.1,
-        pi(0.25),
-        0.2,
-        pi(0.75),
-        0.2,
-        pi(0.05),
-        0.1,
-        pi(0.95),
-        0.1,
-        pi(0.45),
-        0.1,
-        pi(0.55),
-        0.1,
-      ]),
-      d = wc([
-        "luxe",
-        0.55,
-        "gS",
-        0.1,
-        "rad",
-        0.09,
-        "bkd",
-        0.05,
-        "pltq",
-        0.05,
-        "wM",
-        0.04,
-        "AM",
-        0.03,
-        "rose",
-        0.02,
-        "blk",
-        0.02,
-        "cool",
-        0.01,
-        "wOC",
-        0.01,
-        "pG",
-        0.01,
-        "dL",
-        0.01,
-        "lD",
-        0.01,
-      ]);
-    let e,
-      f = null;
-    "bkd" === d
-      ? ((e = pcBaked), (f = pbcBaked))
-      : "luxe" === d
-      ? ((e = pcLx), (f = pbcLx))
-      : "lD" === d
-      ? ((e = makeLxD()), (f = pbcLx))
-      : "cool" === d
-      ? ((e = pcCool), (f = pbcCool))
-      : "rad" === d
-      ? ((e = pcRad), (f = pbcRad))
-      : "pltq" === d
-      ? ((e = pcPolitique), (f = pbcPolitique))
-      : "retro" === d
-      ? ((e = pcRetro), (f = pbcRetro))
-      : "blk" === d
-      ? ((e = pcBlack), (f = pbcBlack))
-      : "wM" === d
-      ? ((e = pcWhtMono), (f = pbcWhtMono))
-      : "AM" === d
-      ? ((e = pcAM), (f = pbcAM))
-      : "dL" === d
-      ? ((e = pcDarkLifestyle), (f = pbcDarkLifestyle))
-      : "pG" === d
-      ? ((e = pcPartyGirl), (f = pbcPartyGirl))
-      : "wOC" === d
-      ? ((e = pcWhtOnCrm), (f = pbcWhtOnCrm))
-      : "gS" === d
-      ? ((e = pcGolfSocks), (f = pbcGolfSocks))
-      : "rose" === d
-      ? ((e = pcRose), (f = pbcRose))
-      : ((e = pcLx), (f = pbcLx));
-    const g = a !== V7 && od(0.6);
-    let i = "high";
-    i =
-      a === V7
-        ? "highAF"
-        : a === V6
-        ? "high"
-        : a === V1
-        ? "highAF"
-        : a === V2
-        ? wc(["high", 0.6, "med", 0.35, "low", 0.05])
-        : wc(["med", 0.7, "high", 0.2, "low", 0.1]);
-    const j = f(a);
-    background(j[0], j[1], j[2]);
-    let k = null;
-    a === V1
-      ? (k = pm1)
-      : a === V2
-      ? (k = pm2)
-      : a === V3
-      ? (k = pm3)
-      : a === V5
-      ? (k = pm4)
-      : a === V6
-      ? (k = pm5)
-      : a === V7
-      ? (k = pm6)
-      : a === V4 && (k = pm7);
-    let l = 150;
-    a === V1
-      ? (l = gssn(10, 10))
-      : a === V2
-      ? (l = gssn(40, 30))
-      : a === V3
-      ? (l = gssn(90, 50))
-      : a === V5
-      ? (l = gssn(150, 50))
-      : a === V6
-      ? (l = gssn(200, 50))
-      : a === V7 && (l = gssn(200, 50)),
-      (l = Math.max(5, l));
-    let m = [],
-      n = h(0.017);
-    if (a === V1) {
-      h(0.005);
-    } else if (a === V2) {
-      h(0.01);
-    }
-    "highAF" === i
-      ? (n *= 0.5)
-      : "med" === i
-      ? (n *= 2.5)
-      : "low" === i && (n *= 5);
-    for (let a = h(-0.1); a < h(1.101); a += n) m.push(a);
-    m = shffl(m);
-    const o = od(0.04),
-      p = od(0.15) && a > V1;
-    let q = !p && od(0.3);
-    const r =
-        od(0.025) &&
-        "wM" !== d &&
-        "blk" !== d &&
-        "dL" !== d &&
-        "pG" !== d &&
-        "wOC" !== d,
-      s =
-        !r &&
-        od(0.025) &&
-        "wM" !== d &&
-        "blk" !== d &&
-        "dL" !== d &&
-        "pG" !== d &&
-        "wOC" !== d,
-      t =
-        !p &&
-        ("blk" === d ||
-          "wOC" === d ||
-          (od(0.2) && 70 < j[2] && a >= V5 && "pG" !== d)),
-      u = od(0.04),
-      v = flwP(c, b, o),
-      x = cSegs(v, m, l, c, k, g, i, o, s, r, u);
-    for (const b of x) {
-      const d = b.margin;
-      if (2 <= b.points.length) {
+// Define a function to determine the background color based on a value
+const pbcLx = function (a) {
+  // Check if the value is greater than or equal to V6
+  if (a >= V6) {
+    return wc([
+      ddBlue,
+      0.19,
+      bgrndNws,
+      0.3,
+      ppGrn,
+      0.15,
+      pBlue,
+      0.05,
+      pnk,
+      0.1,
+      blue,
+      0.1,
+      grn,
+      0.05,
+      dRed,
+      0.05,
+      pYllw,
+      0.01,
+    ]);
+  }
+  // Check if the value is greater than or equal to V4
+  else if (a >= V4) {
+    return wc([
+      bgrndNws,
+      0.6,
+      pBlue,
+      0.15,
+      pppGrn,
+      0.1,
+      pPnk,
+      0.1,
+      bgrndDBlue,
+      0.05,
+    ]);
+  }
+  // For other values
+  else {
+    return wc([bgrndNws, 0.9, bgrndDBlue, 0.07, pppGrn, 0.03]);
+  }
+};
+
+// Define a function to determine the background color for the "Rad" theme
+const pbcRad = function () {
+  return bgrndNws;
+};
+
+// Define a function to determine the color palette for the "Baked" theme
+const pcBaked = function () {
+  return wc([
+    wht,
+    0.2,
+    pnk,
+    0.05,
+    pPnk,
+    0.1,
+    xGrn,
+    0.5,
+    ppYllwGrn,
+    0.1,
+    pBrwn,
+    0.05,
+  ]);
+};
+
+// Define a function to determine the background color for the "Baked" theme
+const pbcBaked = function () {
+  return bgrndNws;
+};
+
+// Define a function to determine the color palette for the "Cool" theme
+const pcCool = function () {
+  return wc([
+    nwsprnt,
+    0.13,
+    pYllw,
+    0.01,
+    lavender,
+    0.03,
+    grn,
+    0.1,
+    pppGrn,
+    0.04,
+    ppGrn,
+    0.04,
+    ddBlue,
+    0.11,
+    dBlue,
+    0.15,
+    blue,
+    0.25,
+    pBlue,
+    0.1,
+    brwn,
+    0.01,
+    dBrwn,
+    0.04,
+    ddBrwn,
+    0.02,
+  ]);
+};
+
+// Define a function to determine the background color for the "Cool" theme
+const pbcCool = function (a) {
+  return a >= V6
+    ? wc([bgrndNws, 0.5, bgrndDBlue, 0.3, pnk, 0.15, blue, 0.05])
+    : wc([bgrndNws, 0.8, bgrndDBlue, 0.12, blue, 0.06, pPnk, 0.02]);
+};
+
+// Define a function to determine the color palette for the "Black" theme
+const pcBlack = function () {
+  return wc([bgrndNws, 0.15, blk, 0.85]);
+};
+
+// Define a function to determine the background color for the "Black" theme
+const pbcBlack = function () {
+  return bgrndNws;
+};
+
+// Define a function to determine the color palette for the "Politique" theme
+const pcPolitique = function () {
+  return wc([wht, 0.58, dRed, 0.02, pYllw, 0.2, pnk, 0.15, blue, 0.05]);
+};
+
+// Define a function to determine the background color for the "Politique" theme
+const pbcPolitique = function (a) {
+  return a >= V6
+    ? wc([bgrndNws, 0.5, ppBlue, 0.5])
+    : wc([bgrndNws, 0.8, ppBlue, 0.2]);
+};
+
+// Define a function to determine the color palette for the "Retro" theme
+const pcRetro = function () {
+  return wc([
+    dRed,
+    0.07,
+    red,
+    0.03,
+    pOrng,
+    0.05,
+    pYllw,
+    0.02,
+    yllw,
+    0.15,
+    brwn,
+    0.1,
+    dBrwn,
+    0.58,
+  ]);
+};
+
+// Define a function to determine the background color for the "Retro" theme
+const pbcRetro = function () {
+  return wc([nwsprnt, 0.7, pBlue, 0.2, wht, 0.1]);
+};
+
+// Define a function to determine the color palette for the "WhtMono" theme
+const pcWhtMono = function () {
+  return wht;
+};
+
+// Define a function to determine the background color for the "WhtMono" theme
+const pbcWhtMono = function () {
+  return wc([
+    dRed,
+    0.1,
+    red,
+    0.1,
+    nwsprnt,
+    0.01,
+    orng,
+    0.1,
+    pYllw,
+    0.04,
+    yllw,
+    0.05,
+    pnk,
+    0.1,
+    grn,
+    0.1,
+    ddBlue,
+    0.1,
+    dBlue,
+    0.1,
+    blue,
+    0.1,
+    dBrwn,
+    0.02,
+    ddBrwn,
+    0.02,
+    blk,
+    0.09,
+  ]);
+};
+
+// Define a function to determine the color palette for the "AM" theme
+const pcAM = function () {
+  return wc([
+    [260, 20, 20],
+    0.77,
+    [240, 30, 35],
+    0.03,
+    [300, 10, 50],
+     0.05,
+    [180, 20, 30],
+    0.06,
+    [130, 20, 70],
+    0.05,
+    [5, 10, 80],
+    0.02,
+    [5, 40, 90],
+    0.01,
+    [40, 25, 90],
+    0.01,
+  ]);
+};
+
+// Define a function to determine the background color for the "AM" theme
+const pbcAM = function () {
+  return [260, 30, 30];
+};
+
+// Define a function to determine the color palette for the "DarkLifestyle" theme
+const pcDarkLifestyle = function () {
+  return wc([
+    [0, 0, 13],
+    0.2,
+    [0, 0, 16],
+    0.48,
+    [0, 0, 19],
+    0.2,
+    [0, 0, 22],
+    0.1,
+    [0, 0, 25],
+    0.02,
+  ]);
+};
+
+// Define a function to determine the background color for the "DarkLifestyle" theme
+const pbcDarkLifestyle = function () {
+  return [0, 0, 10];
+};
+
+// Define a function to determine the color palette for the "PartyGirl" theme
+const pcPartyGirl = function () {
+  return [350, gssn(65, 4), gssn(85, 4)];
+};
+
+// Define a function to determine the background color for the "PartyGirl" theme
+const pbcPartyGirl = function () {
+  return [225, 70, 20];
+};
+
+// Define a function to determine the color palette for the "WhtOnCrm" theme
+const pcWhtOnCrm = function () {
+  return wht;
+};
+
+// Define a function to determine the background color for the "WhtOnCrm" theme
+const pbcWhtOnCrm = function () {
+  return bgrndNws;
+};
+
+// Define a function to determine the color palette for the "GolfSocks" theme
+const pcGolfSocks = function () {
+  return wc([
+    bgrndNws,
+    0.41,
+    [210, 72, 45],
+    0.15,
+    [210, 72, 30],
+    0.05,
+    [0, 40, 95],
+    0.07,
+    [6, 20, 95],
+    0.05,
+    [130, 50, 30],
+    0.2,
+    [32, 30, 99],
+    0.04,
+    [32, 30, 30],
+    0.03,
+  ]);
+};
+
+// Define a function to determine the background color for the "GolfSocks" theme
+const pbcGolfSocks = function () {
+  return [130, 20, 50];
+};
+
+// Define a function to determine the color palette for the "Rose" theme
+const pcRose = function () {
+  return wc([
+    [150, 8, 40],
+    0.5,
+    [160, 12, 25],
+    0.05,
+    [350, 60, 90],
+    0.05,
+    [350, 45, 80],
+    0.05,
+    [350, 80, 70],
+    0.05,
+    [6, 16, 100],
+    0.2,
+    [15, 26, 97],
+    0.1,
+  ]);
+};
+
+// Define a function to determine the background color for the "Rose" theme
+const pbcRose = function () {
+  return [150, 8, 30];
+};
+
+// Define a function to randomly select a color palette based on probabilities
+const pMnCl = function (a, b, e, f) {
+  let g = a();
+  if (f || e < w(0.015)) return g;
+  for (; g === b; ) g = a();
+  return g;
+};
+
+
+function draw() {
+  noLoop();
+  background(40, 10, 90);
+  
+  // Generate random values for 'a' and 'b'
+  let a = wc([
+    V1, 0.03,
+    V2, 0.01,
+    V3, 0.04,
+    V5, 0.18,
+    V6, 0.5,
+    V7, 0.04,
+    V4, 0.2
+  ]);
+  let b = wc(["none", 0.15, "low", 0.2, "med", 0.45, "high", 0.2]);
+  
+  if (a === V7) {
+    b = wc(["none", 0.4, "low", 0.3, "med", 0.3]);
+  }
+  
+  // Generate random value for 'c'
+  let c = wc([
+    pi(0.5), 0.1,
+    pi(0), 0.1,
+    pi(0.25), 0.2,
+    pi(0.75), 0.2,
+    pi(0.05), 0.1,
+    pi(0.95), 0.1,
+    pi(0.45), 0.1,
+    pi(0.55), 0.1
+  ]);
+  
+  // Generate random value for 'd'
+  let d = wc([
+    "luxe", 0.55,
+    "gS", 0.1,
+    "rad", 0.09,
+    "bkd", 0.05,
+    "pltq", 0.05,
+    "wM", 0.04,
+    "AM", 0.03,
+    "rose", 0.02,
+    "blk", 0.02,
+    "cool", 0.01,
+    "wOC", 0.01,
+    "pG", 0.01,
+    "dL", 0.01,
+    "lD", 0.01
+  ]);
+  
+  // Define function references for 'e' and 'f'
+  let e, f;
+  
+  if (d === "bkd") {
+    e = pcBaked;
+    f = pbcBaked;
+  } else if (d === "luxe") {
+    e = pcLx;
+    f = pbcLx;
+  } else if (d === "lD") {
+    e = makeLxD();
+    f = pbcLx;
+  } else if (d === "cool") {
+    e = pcCool;
+    f = pbcCool;
+  } else if (d === "rad") {
+    e = pcRad;
+    f = pbcRad;
+  } else if (d === "pltq") {
+    e = pcPolitique;
+    f = pbcPolitique;
+  } else if (d === "retro") {
+    e = pcRetro;
+    f = pbcRetro;
+  } else if (d === "blk") {
+    e = pcBlack;
+    f = pbcBlack;
+  } else if (d === "wM") {
+    e = pcWhtMono;
+    f = pbcWhtMono;
+  } else if (d === "AM") {
+    e = pcAM;
+    f = pbcAM;
+  } else if (d === "dL") {
+    e = pcDarkLifestyle;
+    f = pbcDarkLifestyle;
+  } else if (d === "pG") {
+    e = pcPartyGirl;
+    f = pbcPartyGirl;
+  } else if (d === "wOC") {
+    e = pcWhtOnCrm;
+    f = pbcWhtOnCrm;
+  } else if (d === "gS") {
+    e = pcGolfSocks;
+    f = pbcGolfSocks;
+  } else if (d === "rose") {
+    e = pcRose;
+    f = pbcRose;
+  } else {
+    e = pcLx;
+    f = pbcLx;
+  }
+  
+  // Generate random values for 'g', 'i', and 'j'
+  let g = a !== V7 && od(0.6);
+  let i = "high";
+  
+  if (a === V7) {
+    i = "highAF";
+  } else if (a === V6) {
+    i = "high";
+  } else if (a === V1) {
+    i = "highAF";
+  } else if (a === V2) {
+    i = wc(["high", 0.6, "med", 0.35, "low", 0.05]);
+  } else {
+    i = wc(["med", 0.7, "high", 0.2, "low", 0.1]);
+  }
+  
+  // Generate random background color based on 'a'
+  const j = f(a);
+  background(j[0], j[1], j[2]);
+  
+  let k = null;
+  
+  if (a === V1) {
+    k = pm1;
+  } else if (a === V2) {
+    k = pm2;
+  } else if (a === V3) {
+    k = pm3;
+  } else if (a === V5) {
+    k = pm4;
+  } else if (a === V6) {
+    k = pm5;
+  } else if (a === V7) {
+    k = pm6;
+  } else if (a === V4) {
+    k = pm7;
+  }
+  
+  let l = 150;
+  
+  if (a === V1) {
+    l = gssn(10, 10);
+  } else if (a === V2) {
+    l = gssn(40, 30);
+  } else if (a === V3) {
+    l = gssn(90, 50);
+  } else if (a === V5) {
+    l = gssn(150, 50);
+  } else if (a === V6) {
+    l = gssn(200, 50);
+  } else if (a === V7) {
+    l = gssn(200, 50);
+  }
+  
+  l = Math.max(5, l);
+  
+  let m = [];
+  let n = h(0.017);
+  
+  if (a === V1) {
+    h(0.005);
+  } else if (a === V2) {
+    h(0.01);
+  }
+  
+  if (i === "highAF") {
+    n *= 0.5;
+  } else if (i === "med") {
+    n *= 2.5;
+  } else if (i === "low") {
+    n *= 5;
+  }
+  
+  for (let a = h(-0.1); a < h(1.101); a += n) {
+    m.push(a);
+  }
+  
+  m = shffl(m);
+  
+  const o = od(0.04);
+  const p = od(0.15) && a > V1;
+  let q = !p && od(0.3);
+  const r = od(0.025) && d !== "wM" && d !== "blk" && d !== "dL" && d !== "pG" && d !== "wOC";
+  const s = !r && od(0.025) && d !== "wM" && d !== "blk" && d !== "dL" && d !== "pG" && d !== "wOC";
+  const t = !p && (d === "blk" || d === "wOC" || (od(0.2) && j[2] > 70 && a >= V5 && d !== "pG"));
+  const u = od(0.04);
+  const v = flwP(c, b, o);
+  const x = cSegs(v, m, l, c, k, g, i, o, s, r, u);
+  
+  for (const b of x) {
+    const d = b.margin;
+    
+    if (b.points.length >= 2) {
+      noStroke();
+      
+      const f = pMnCl(e, j, d, t);
+      fill(f[0], f[1], f[2]);
+      
+      if (t) {
+        stroke(0, 0, 15);
+        swght(w(0.001));
+      } else {
         noStroke();
-        const f = pMnCl(e, j, d, t);
-        fill(f[0], f[1], f[2]),
-          t ? (stroke(0, 0, 15), swght(w(0.001))) : noStroke();
-        let c = z4;
-        d === z0
-          ? (c = w(7e-4))
-          : d === z1
-          ? (c = w(0.0019))
-          : d === z2
-          ? (c = w(0.0038))
-          : d === z3
-          ? (c = w(0.009))
-          : d === z4
-          ? (c = w(0.0188))
-          : d === z5
-          ? (c = w(0.0388))
-          : d === z6
-          ? (c = w(0.078))
-          : d === z7 && (c = w(0.157));
-        const g = fatTop(b.points, c),
-          i = fatBot(b.points, c),
-          k = fat(b.points, c),
-          l = crvL(g),
-          m = crvL(i);
-        if (p)
-          strokeSegment(f, c, l, function (a, b) {
-            const [c, d] = lerpCrv(g, a, l),
-              [e, f] = lerpCrv(i, a, m);
-            return [lrp(c, e, b), lrp(d, f, b)];
-          });
-        else {
-          beginShape();
-          for (const a of k) vrtx(a[0], a[1]);
-          endShape(CLOSE);
-          for (const b of [!0, !1]) {
-            let d = pSL(a);
-            q && (d = 2 * c);
-            let f = d / l;
-            f = Math.floor(f * 10000) / 10000.0;
-            const j = pNStps(f, q);
-            if (0 < j)
-              if (b) {
-                for (let a = 0; a < j * f + 0.001 - f; a += f) {
-                  const b = a;
-                  let c = a + f;
-                  const d = e();
-                  fSeg(d, t, g, i, b, c, l, m);
-                }
-              } else {
-                for (let a = 1 - j * f; a < 1 + f; a += f) {
-                  const b = a;
-                  let c = a + f;
-                  0.99 < c && 1 > c && (c = 1.0001);
-                  const d = e();
-                  fSeg(d, t, g, i, b, c, l, m);
-                }
+      }
+      
+      let c = z4;
+      
+      if (d === z0) {
+        c = w(7e-4);
+      } else if (d === z1) {
+        c = w(0.0019);
+      } else if (d === z2) {
+        c = w(0.0038);
+      } else if (d === z3) {
+        c = w(0.009);
+      } else if (d === z4) {
+        c = w(0.0188);
+      } else if (d === z5) {
+        c = w(0.0388);
+      } else if (d === z6) {
+        c = w(0.078);
+      } else if (d === z7) {
+        c = w(0.157);
+      }
+      
+      const g = fatTop(b.points, c);
+      const i = fatBot(b.points, c);
+      const k = fat(b.points, c);
+      const l = crvL(g);
+      const m = crvL(i);
+      
+      if (p) {
+        strokeSegment(f, c, l, function(a, b) {
+          const [c, d] = lerpCrv(g, a, l);
+          const [e, f] = lerpCrv(i, a, m);
+          return [lrp(c, e, b), lrp(d, f, b)];
+        });
+      } else {
+        beginShape();
+        for (const a of k) {
+          vertex(a[0], a[1]);
+        }
+        endShape(CLOSE);
+        
+        for (const b of [true, false]) {
+          let d = pSL(a);
+          q && (d = 2 * c);
+          let f = d / l;
+          f = Math.floor(f * 10000) / 10000.0;
+          const j = pNStps(f, q);
+          
+          if (j > 0) {
+            if (b) {
+              for (let a = 0; a < j * f + 0.001 - f; a += f) {
+                const b = a;
+                let c = a + f;
+                const d = e();
+                fSeg(d, t, g, i, b, c, l, m);
               }
+            } else {
+              for (let a = 1 - j * f; a < 1 + f; a += f) {
+                const b = a;
+                let c = a + f;
+                if (0.99 < c && c < 1) {
+                  c = 1.0001;
+                }
+                const d = e();
+                fSeg(d, t, g, i, b, c, l, m);
+              }
+            }
           }
         }
       }
     }
   }
+}
