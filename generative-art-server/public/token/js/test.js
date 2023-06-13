@@ -703,16 +703,14 @@ function flwL(a, b, c, e, f) {
           wc([0, 0.2, 1, 0.1, 2, 0.15, 4, 0.4, 8, 0.12, 16, 0.03])
         );
   }
-  
-
 
 // RGB color values
-const wht = [40, 2, 98];
-const dRed = [358, 64, 86];
-const red = [358, 80, 82];
-const tan = [25, 40, 88];
-const midTan = [25, 40, 60];
-const orng = [25, 78, 90];
+const wht = [49,52,90];           
+const dRed = [358, 64, 86];       
+const red = [358, 80, 82];        
+const tan = [25, 40, 88];         
+const midTan = [25, 40, 60];      
+const orng = [25, 78, 90];        
 const pOrng = [25, 68, 93];
 const pYllw = [43, 60, 99];
 const yllw = [43, 90, 99];
@@ -738,25 +736,10 @@ const dBrwn = [25, 45, 23];
 const ddBrwn = [25, 45, 13];
 const nwsprnt = [40, 12, 88];
 const bgrndNws = [40, 8, 92];
-const blk = [0, 0, 10];
-
-// Function to create color variants
-function createColorVariant(baseColor, variant) {
-  const variantColor = [...baseColor];
-  for (let i = 0; i < 3; i++) {
-    variantColor[i] += variant;
-    if (variantColor[i] < 0) {
-      variantColor[i] = 0;
-    } else if (variantColor[i] > 255) {
-      variantColor[i] = 255;
-    }
-  }
-  return variantColor;
-}
-
-// Example usage:
-const whtLighter = createColorVariant(wht, 20); // Creates a lighter variant of wht color
-const redDarker = createColorVariant(red, -30); // Creates a darker variant of red color
+const blk = [0, 0, 10],
+  pbcDefault = function () {
+    return bgrndNws;
+  };
 
 
 // Color functions with variants
@@ -889,47 +872,6 @@ const makeLxD = function () {
     return wc(colorVariants);
   };
 };
-
-
-    pbcLx = function (a) {
-      return a >= V6
-        ? wc([
-            ddBlue,
-            0.19,
-            bgrndNws,
-            0.3,
-            ppGrn,
-            0.15,
-            pBlue,
-            0.05,
-            pnk,
-            0.1,
-            blue,
-            0.1,
-            grn,
-            0.05,
-            dRed,
-            0.05,
-            pYllw,
-            0.01,
-          ])
-        : a >= V4
-        ? wc([
-            bgrndNws,
-            0.6,
-            pBlue,
-            0.15,
-            pppGrn,
-            0.1,
-            pPnk,
-            0.1,
-            bgrndDBlue,
-            0.05,
-          ])
-        : wc([bgrndNws, 0.9, bgrndDBlue, 0.07, pppGrn, 0.03]);
-    },
-
-
 // Define a function to determine the background color based on a value
 const pbcLx = function (a) {
   // Check if the value is greater than or equal to V6
@@ -975,6 +917,7 @@ const pbcLx = function (a) {
     return wc([bgrndNws, 0.9, bgrndDBlue, 0.07, pppGrn, 0.03]);
   }
 };
+
 
 // Define a function to determine the background color for the "Rad" theme
 const pbcRad = function () {
