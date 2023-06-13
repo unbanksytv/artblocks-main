@@ -48,8 +48,6 @@ const dv = new DataView(state.buffer);
 let _nG = null;
 let _hNG = false;
 
-
-
 // Function to generate a random number using the xorshift algorithm
 const rnd = () => {
     const a = state[0];
@@ -139,73 +137,84 @@ const rnd = () => {
     return f;
   };
   
-  // Function to generate a Gaussian random number
-  const gssn = (a = 0, b = 1) => {
+// Function to generate a Gaussian random number
+const gssn = (a = 0, b = 1) => {
+    // Check if there is a previously generated Gaussian random number available
     if (_hNG) {
       _hNG = false;
       const c = _nG;
       _nG = null;
-      return a + b * c;
+      return a + b * c; // Return the scaled and shifted previous Gaussian random number
     }
+  
+    // Generate a new Gaussian random number
     let e, f, g;
     do {
+      // Generate two random numbers between -1 and 1
       e = 2 * rnd() - 1;
       f = 2 * rnd() - 1;
-      g = e * e + f * f;
-    } while (1 <= g || 0 === g);
+      g = e * e + f * f; // Calculate the squared distance from the origin
+    } while (1 <= g || 0 === g); // Repeat until the numbers fall within a unit circle
+  
+    // Calculate the standard normal distribution value
     const h = Math.sqrt((-2 * Math.log(g)) / g);
-    _nG = f * h;
-    _hNG = true;
-    return a + b * (e * h);
+    _nG = f * h; // Store the new Gaussian random number
+    _hNG = true; // Set the flag indicating a new Gaussian random number is available
+  
+    return a + b * (e * h); // Return the scaled and shifted new Gaussian random number
   };
 
+  nScts = 10; // Number of sections
 
-    nScts = 10;
-  let c, ww, wh, wr, LX, RX, TY, BY, spc, z0, z1, z2, z3, z4, z5, z6, z7, sW, sH;
-  const dw = 2e3,
-    dh = 2400,
-    V1 = 1,
-    V2 = 2,
-    V3 = 3,
-    V4 = 4,
-    V5 = 5,
-    V6 = 6,
-    V7 = 7;
+  let c, ww, wh, wr, LX, RX, TY, BY, spc, z0, z1, z2, z3, z4, z5, z6, z7, sW, sH; // Variables for various calculations
+  
+  const dw = 2e3, // Default width
+    dh = 2400, // Default height
+    V1 = 1, // Value 1
+    V2 = 2, // Value 2
+    V3 = 3, // Value 3
+    V4 = 4, // Value 4
+    V5 = 5, // Value 5
+    V6 = 6, // Value 6
+    V7 = 7; // Value 7
+  
 
-
-  function setup() {
-    //windowHeight = 2000;
-    //windowWidth = 3000;
-    //windowHeight >= 1.2 * windowWidth
-      /*? ((ww = windowWidth), (wh = 1.2 * windowWidth))
-      : ((wh = windowHeight), (ww = windowHeight / 1.2)),*/
-      //? ((ww = 5120), (wh = 1.2 * 1440))
-      (wh = 2000), (ww = 3000),
-      //(wh = 3000), (ww = 2000),
-      (wr = ww / dw),
-      (c = createCanvas(ww, wh)),
-      //(c = createCanvas(3000, 2000)),
-      colorMode(HSB, 360, 100, 100, 100),
-      set_seed(tokenData.hash),
-      randomSeed(0),
-      noiseSeed(0),
-      (LX = -500),
-      (RX = 2500),
-      (TY = -0.25 * dh),
-      (BY = 1.25 * dh),
-      (spc = Math.floor(10)),
-      (z0 = 2),
-      (z1 = 5),
-      (z2 = 10),
-      (z3 = 20),
-      (z4 = 40),
-      (z5 = 80),
-      (z6 = 160),
-      (z7 = 320),
-      (sW = dw / nScts),
-      (sH = dh / nScts);
+    function setup() {
+        // Set canvas dimensions and properties
+        // windowHeight = 2000;
+        // windowWidth = 3000;
+        // windowHeight >= 1.2 * windowWidth
+        /*? ((ww = windowWidth), (wh = 1.2 * windowWidth))
+        : ((wh = windowHeight), (ww = windowHeight / 1.2)),*/
+        //? ((ww = 5120), (wh = 1.2 * 1440))
+        (wh = 2000), (ww = 3000),
+        //(wh = 3000), (ww = 2000),
+        (wr = ww / dw), // Calculate width ratio
+        (c = createCanvas(ww, wh)), // Create canvas
+        //(c = createCanvas(3000, 2000)),
+        colorMode(HSB, 360, 100, 100, 100), // Set color mode
+        set_seed(tokenData.hash), // Set seed based on token data
+        randomSeed(0), // Set random seed
+        noiseSeed(0), // Set noise seed
+        (LX = -500), // Left X-coordinate
+        (RX = 2500), // Right X-coordinate
+        (TY = -0.25 * dh), // Top Y-coordinate
+        (BY = 1.25 * dh), // Bottom Y-coordinate
+        (spc = Math.floor(10)), // Spacing between sections
+        (z0 = 2), // Variable for calculations
+        (z1 = 5), // Variable for calculations
+        (z2 = 10), // Variable for calculations
+        (z3 = 20), // Variable for calculations
+        (z4 = 40), // Variable for calculations
+        (z5 = 80), // Variable for calculations
+        (z6 = 160), // Variable for calculations
+        (z7 = 320), // Variable for calculations
+        (sW = dw / nScts), // Section width
+        (sH = dh / nScts); // Section height
+      }
       
-  }
+      
+ 
   function w(a) {
     return void 0 === a ? dw : dw * a;
   }
