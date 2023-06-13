@@ -6,7 +6,7 @@ const getRandHex = size => {
   let result = '0x';
 
   for (let n = 0; n < size; n++) {
-    result += hexRef[Math.floor(Math.random() * 22)];
+    result += hexRef[Math.floor(Math.random() * hexRef.length)];
   }
 
   return result;
@@ -50,284 +50,320 @@ let _hNG = false;
 
 // Function to generate a random number using the xorshift algorithm
 const rnd = () => {
-    const a = state[0];
-    const b = state[1];
-    const c = state[2];
-    const e = state[3];
-    const f = 0 | (a0 + m0 * a);
-    const g = 0 | (a1 + m0 * b + (m1 * a + (f >>> 16)));
-    const h = 0 | (a2 + m0 * c + m1 * b + (m2 * a + (g >>> 16)));
-    state[0] = f;
-    state[1] = g;
-    state[2] = h;
-    state[3] = a3 + m0 * e + (m1 * c + m2 * b) + (m3 * a + (h >>> 16));
-    const i = (e << 21) + (((e >> 2) ^ c) << 5) + (((c >> 2) ^ b) >> 11);
-    return eps * (((i >>> (e >> 11)) | (i << (31 & -(e >> 11)))) >>> 0);
-  };
-  
-  // Function to hash a byte array into a 32-bit integer
-  const hash32 = (a, b = 0) => {
-    const c = 16;
-    const e = 65535;
-    const f = 255;
-    let g, j = 1540483477;
-    let m = a.length;
-    let n = b ^ m;
-    let o = 0;
-  
-    while (4 <= m) {
-      g = (a[o] & f) |
-        ((a[++o] & f) << 8) |
-        ((a[++o] & f) << 16) |
-        ((a[++o] & f) << 24);
-      g = (g & e) * j + ((((g >>> c) * j) & e) << c);
-      g ^= g >>> 24;
-      g = (g & e) * j + ((((g >>> c) * j) & e) << c);
-      n = ((n & e) * j + ((((n >>> c) * j) & e) << c)) ^ g;
-      m -= 4;
-      ++o;
-    }
-  
-    switch (m) {
-      case 3:
-        n ^= (a[o + 2] & f) << c;
-      case 2:
-        n ^= (a[o + 1] & f) << 8;
-      case 1:
-        n ^= a[o] & f;
-        n = (n & e) * j + ((((n >>> c) * j) & e) << c);
-    }
-  
-    n ^= n >>> 13;
-    n = (n & e) * j + ((((n >>> 16) * j) & e) << 16);
-    n ^= n >>> 15;
-  
-    return n >>> 0;
-  };
-  
-  // Function to set the seed for the random number generator
-  const set_seed = (a) => {
-    _hNG = false;
-    _nG = null;
-    const b = ~~((a.length - 2) / 2);
-    const c = [];
-    for (let e = 0; e < b; e++) {
-      const d = 2 + 2 * e;
-      c.push(parseInt(a.slice(d, d + 2), 16));
-    }
-    const e = hash32(c, 1690382925);
-    const f = hash32(c, 72970470);
-    dv.setUint32(0, e);
-    dv.setUint32(4, f);
-  };
-  
-  // Function to generate a random number within a range
-  const rng = (a, b) => (void 0 === b && ((b = a), (a = 0)), rnd() * (b - a) + a);
-  
-  // Function to shuffle an array randomly
-  const shffl = (a) => {
-    const f = [...a];
-    let e = a.length;
-    while (e) {
-      const b = ~~(rnd() * e--);
-      const c = f[e];
-      f[e] = f[b];
-      f[b] = c;
-    }
-    return f;
-  };
-  
+  const a = state[0];
+  const b = state[1];
+  const c = state[2];
+  const e = state[3];
+  const f = 0 | (a0 + m0 * a);
+  const g = 0 | (a1 + m0 * b + (m1 * a + (f >>> 16)));
+  const h = 0 | (a2 + m0 * c + m1 * b + (m2 * a + (g >>> 16)));
+  state[0] = f;
+  state[1] = g;
+  state[2] = h;
+  state[3] = a3 + m0 * e + (m1 * c + m2 * b) + (m3 * a + (h >>> 16));
+  const i = (e << 21) + (((e >> 2) ^ c) << 5) + (((c >> 2) ^ b) >> 11);
+  return eps * (((i >>> (e >> 11)) | (i << (31 & -(e >> 11)))) >>> 0);
+};
+
+// Function to hash a byte array into a 32-bit integer
+const hash32 = (a, b = 0) => {
+  const c = 16;
+  const e = 65535;
+  const f = 255;
+  let g, j = 1540483477;
+  let m = a.length;
+  let n = b ^ m;
+  let o = 0;
+
+  while (4 <= m) {
+    g = (a[o] & f) |
+      ((a[++o] & f) << 8) |
+      ((a[++o] & f) << 16) |
+      ((a[++o] & f) << 24);
+    g = (g & e) * j + ((((g >>> c) * j) & e) << c);
+    g ^= g >>> 24;
+    g = (g & e) * j + ((((g >>> c) * j) & e) << c);
+    n = ((n & e) * j + ((((n >>> c) * j) & e) << c)) ^ g;
+    m -= 4;
+    ++o;
+  }
+
+  switch (m) {
+    case 3:
+      n ^= (a[o + 2] & f) << c;
+    case 2:
+      n ^= (a[o + 1] & f) << 8;
+    case 1:
+      n ^= a[o] & f;
+      n = (n & e) * j + ((((n >>> c) * j) & e) << c);
+  }
+
+  n ^= n >>> 13;
+  n = (n & e) * j + ((((n >>> 16) * j) & e) << 16);
+  n ^= n >>> 15;
+
+  return n >>> 0;
+};
+
+// Function to set the seed for the random number generator
+const set_seed = (a) => {
+  _hNG = false;
+  _nG = null;
+  const b = ~~((a.length - 2) / 2);
+  const c = [];
+  for (let e = 0; e < b; e++) {
+    const d = 2 + 2 * e;
+    c.push(parseInt(a.slice(d, d + 2), 16));
+  }
+  const e = hash32(c, 1690382925);
+  const f = hash32(c, 72970470);
+  dv.setUint32(0, e);
+  dv.setUint32(4, f);
+};
+
+// Function to generate a random number within a range
+const rng = (a, b) => (void 0 === b && ((b = a), (a = 0)), rnd() * (b - a) + a);
+
+// Function to shuffle an array randomly
+const shffl = (a) => {
+  const f = [...a];
+  let e = a.length;
+  while (e) {
+    const b = ~~(rnd() * e--);
+    const c = f[e];
+    f[e] = f[b];
+    f[b] = c;
+  }
+  return f;
+};
+
 // Function to generate a Gaussian random number
 const gssn = (a = 0, b = 1) => {
-    // Check if there is a previously generated Gaussian random number available
-    if (_hNG) {
-      _hNG = false;
-      const c = _nG;
-      _nG = null;
-      return a + b * c; // Return the scaled and shifted previous Gaussian random number
-    }
-  
-    // Generate a new Gaussian random number
-    let e, f, g;
-    do {
-      // Generate two random numbers between -1 and 1
-      e = 2 * rnd() - 1;
-      f = 2 * rnd() - 1;
-      g = e * e + f * f; // Calculate the squared distance from the origin
-    } while (1 <= g || 0 === g); // Repeat until the numbers fall within a unit circle
-  
-    // Calculate the standard normal distribution value
-    const h = Math.sqrt((-2 * Math.log(g)) / g);
-    _nG = f * h; // Store the new Gaussian random number
-    _hNG = true; // Set the flag indicating a new Gaussian random number is available
-  
-    return a + b * (e * h); // Return the scaled and shifted new Gaussian random number
-  };
+  // Check if there is a previously generated Gaussian random number available
+  if (_hNG) {
+    _hNG = false;
+    const c = _nG;
+    _nG = null;
+    return a + b * c; // Return the scaled and shifted previous Gaussian random number
+  }
 
-  nScts = 10; // Number of sections
+  // Generate a new Gaussian random number
+  let e, f, g;
+  do {
+    // Generate two random numbers between -1 and 1
+    e = 2 * rnd() - 1;
+    f = 2 * rnd() - 1;
+    g = e * e + f * f; // Calculate the squared distance from the origin
+  } while (1 <= g || 0 === g); // Repeat until the numbers fall within a unit circle
 
-  let c, ww, wh, wr, LX, RX, TY, BY, spc, z0, z1, z2, z3, z4, z5, z6, z7, sW, sH; // Variables for various calculations
-  
-  const dw = 2e3, // Default width
-    dh = 2400, // Default height
-    V1 = 1, // Value 1
-    V2 = 2, // Value 2
-    V3 = 3, // Value 3
-    V4 = 4, // Value 4
-    V5 = 5, // Value 5
-    V6 = 6, // Value 6
-    V7 = 7; // Value 7
-  
+  // Calculate the standard normal distribution value
+  const h = Math.sqrt((-2 * Math.log(g)) / g);
+  _nG = f * h; // Store the new Gaussian random number
+  _hNG = true; // Set the flag indicating a new Gaussian random number is available
 
-    function setup() {
-        // Set canvas dimensions and properties
-        // windowHeight = 2000;
-        // windowWidth = 3000;
-        // windowHeight >= 1.2 * windowWidth
-        /*? ((ww = windowWidth), (wh = 1.2 * windowWidth))
-        : ((wh = windowHeight), (ww = windowHeight / 1.2)),*/
-        //? ((ww = 5120), (wh = 1.2 * 1440))
-        (wh = 2000), (ww = 3000),
-        //(wh = 3000), (ww = 2000),
-        (wr = ww / dw), // Calculate width ratio
-        (c = createCanvas(ww, wh)), // Create canvas
-        //(c = createCanvas(3000, 2000)),
-        colorMode(HSB, 360, 100, 100, 100), // Set color mode
-        set_seed(tokenData.hash), // Set seed based on token data
-        randomSeed(0), // Set random seed
-        noiseSeed(0), // Set noise seed
-        (LX = -500), // Left X-coordinate
-        (RX = 2500), // Right X-coordinate
-        (TY = -0.25 * dh), // Top Y-coordinate
-        (BY = 1.25 * dh), // Bottom Y-coordinate
-        (spc = Math.floor(10)), // Spacing between sections
-        (z0 = 2), // Variable for calculations
-        (z1 = 5), // Variable for calculations
-        (z2 = 10), // Variable for calculations
-        (z3 = 20), // Variable for calculations
-        (z4 = 40), // Variable for calculations
-        (z5 = 80), // Variable for calculations
-        (z6 = 160), // Variable for calculations
-        (z7 = 320), // Variable for calculations
-        (sW = dw / nScts), // Section width
-        (sH = dh / nScts); // Section height
-      }
-      
-      
- 
-  function w(a) {
-    return void 0 === a ? dw : dw * a;
-  }
-  function h(a) {
-    return void 0 === a ? dh : dh * a;
-  }
-  function vrtx(a, b) {
-    vertex(a * wr, b * wr);
-  }
-  function swght(a) {
-    strokeWeight(a * wr);
-  }
-  function pi(a) {
-    return Math.PI * a;
-  }
-  function od(a) {
-    return rnd() <= a;
-  }
-  function rscl(a, b, c, e, f) {
-    return e + (a - b) * ((f - e) / (c - b));
-  }
-  function snp(a, b) {
-    let c = a % b;
-    return c > 0.5 * b ? a + b - c : a - c;
-  }
-  function adjFlw(a, b, c, e, f) {
-    for (let g = 0; g < a.length; g++) {
-      const h = LX + spc * g;
-      for (let i = 0; i < a[0].length; i++) {
-        const j = TY + spc * i,
-          k = dist(b, c, h, j);
-        if (k < e) {
-          const b = rscl(k, 0, e, f, 0);
-          a[g][i] += b;
-        }
-      }
-    }
-  }
-  function adjFlw2(a, b, c, e, f) {
-    let g = w(1);
-    g = "low" === f ? w(0.25) : (f = "med") ? w(0.18) : w(0.12);
-    for (let h = 0; h < a.length; h++) {
-      const f = LX + spc * h;
-      for (let i = 0; i < a[0].length; i++) {
-        const j = TY + spc * i,
-          k = dist(b, c, f, j),
-          l = e ? pi(0.025) : pi(-0.025),
-          m = l * sqrt(k / g);
-        a[h][i] += m;
-      }
-    }
-  }
-  function flwP(a, b, c) {
-    const e = [];
-    for (let f = LX; f < RX; f += spc) {
-      const b = [];
-      for (let e, g = TY; g < BY; g += spc)
-        (e = a),
-          c &&
-            ((e = angle(f, g, w(0.5), h(0.4)) - pi(0.5)),
-            (d = dist(f, g, w(0.5), h(0.5))),
-            (e += rscl(d, 0, w(1.5), 0, pi(1)))),
-          b.push(e);
-      e.push(b);
-    }
-    let f = 0,
-      g = 0;
-    "none" === b
-      ? (f = 0)
-      : "low" === b
-      ? ((f = 15), (g = pi(0.1)))
-      : "med" === b
-      ? ((f = 28), (g = pi(0.25)))
-      : ((f = 45), (g = pi(0.45))),
-      c && (f = 0);
-    for (let h = 0; h < f; h++) {
-      const a = rng(LX, RX),
-        c = rng(TY, BY);
-      if (od(0.7)) {
-        const b = gssn(0, g),
-          f = Math.max(w(0.1), Math.abs(gssn(w(0.35), w(0.15))));
-        adjFlw(e, a, c, f, b);
-      } else {
-        const f = od(0.5);
-        adjFlw2(e, a, c, f, b);
+  return a + b * (e * h); // Return the scaled and shifted new Gaussian random number
+};
+
+nScts = 10; // Number of sections
+
+let c, ww, wh, wr, LX, RX, TY, BY, spc, z0, z1, z2, z3, z4, z5, z6, z7, sW, sH; // Variables for various calculations
+
+const dw = 2e3, // Default width
+  dh = 2400, // Default height
+  V1 = 1, // Value 1
+  V2 = 2, // Value 2
+  V3 = 3, // Value 3
+  V4 = 4, // Value 4
+  V5 = 5, // Value 5
+  V6 = 6, // Value 6
+  V7 = 7; // Value 7
+
+function setup() {
+  // Set canvas dimensions and properties
+  // windowHeight = 2000;
+  // windowWidth = 3000;
+  // windowHeight >= 1.2 * windowWidth
+  /*? ((ww = windowWidth), (wh = 1.2 * windowWidth))
+  : ((wh = windowHeight), (ww = windowHeight / 1.2)),*/
+  //? ((ww = 5120), (wh = 1.2 * 1440))
+  (wh = 2000), (ww = 3000),
+  //(wh = 3000), (ww = 2000),
+  (wr = ww / dw), // Calculate width ratio
+  (c = createCanvas(ww, wh)), // Create canvas
+  //(c = createCanvas(3000, 2000)),
+  colorMode(HSB, 360, 100, 100, 255), // Set color mode to HSB with HEX format
+  set_seed(tokenData.hash), // Set seed based on token data
+  randomSeed(0), // Set random seed
+  noiseSeed(0), // Set noise seed
+  (LX = -500), // Left X-coordinate
+  (RX = 2500), // Right X-coordinate
+  (TY = -0.25 * dh), // Top Y-coordinate
+  (BY = 1.25 * dh), // Bottom Y-coordinate
+  (spc = Math.floor(10)), // Spacing between sections
+  (z0 = 2), // Variable for calculations
+  (z1 = 5), // Variable for calculations
+  (z2 = 10), // Variable for calculations
+  (z3 = 20), // Variable for calculations
+  (z4 = 40), // Variable for calculations
+  (z5 = 80), // Variable for calculations
+  (z6 = 160), // Variable for calculations
+  (z7 = 320), // Variable for calculations
+  (sW = dw / nScts), // Section width
+  (sH = dh / nScts); // Section height
+}
+
+// Function to calculate the value scaled by the default width (dw)
+function w(a) {
+  return a === undefined ? dw : dw * a;
+}
+
+// Function to calculate the value scaled by the default height (dh)
+function h(a) {
+  return a === undefined ? dh : dh * a;
+}
+
+// Function to draw a vertex with values scaled by the ratio (wr)
+function vrtx(a, b) {
+  vertex(a * wr, b * wr);
+}
+
+// Function to set stroke weight scaled by the ratio (wr)
+function swght(a) {
+  strokeWeight(a * wr);
+}
+
+// Function to calculate the value multiplied by PI
+function pi(a) {
+  return Math.PI * a;
+}
+
+// Function to determine if a random number is less than or equal to a given value
+function od(a) {
+  return rnd() <= a;
+}
+
+// Function to scale a value from one range to another
+function rscl(a, b, c, e, f) {
+  return e + (a - b) * (f - e) / (c - b);
+}
+
+// Function to snap a value to the nearest multiple of b
+function snp(a, b) {
+  const c = a % b;
+  return c > 0.5 * b ? a + b - c : a - c;
+}
+
+// Function to adjust the flow values based on distance
+function adjFlw(a, b, c, e, f) {
+  for (let g = 0; g < a.length; g++) {
+    const h = LX + spc * g;
+    for (let i = 0; i < a[0].length; i++) {
+      const j = TY + spc * i;
+      const k = dist(b, c, h, j);
+      if (k < e) {
+        const b = rscl(k, 0, e, f, 0);
+        a[g][i] += b;
       }
     }
-    return e;
   }
-  function flwL(a, b, c, e, f) {
-    const g = a.length,
-      h = a[0].length,
-      i = w(0.007),
-      j = [];
-    for (let k = 0; k < b.length; k++) {
-      const l = [],
-        m = Math.abs(gssn(c, 0.25 * c));
-      let n = b[k][0],
-        o = b[k][1];
-      for (let b = 0; b < m; b++) {
-        l.push([n, o]);
-        const b = Math.floor((n - LX) / spc),
-          c = Math.floor((o - TY) / spc);
-        let j = e;
-        0 <= c && c < h && 0 <= b && b < g && (j = a[b][c]),
-          f && (j = snp(j, pi(0.2))),
-          (n += i * cos(j)),
-          (o += i * sin(j));
-      }
-      j.push(l);
+}
+
+// Function to adjust the flow values based on distance and flow type
+function adjFlw2(a, b, c, e, f) {
+  let g = w(1);
+  g = f === "low" ? w(0.25) : f === "med" ? w(0.18) : w(0.12);
+  for (let h = 0; h < a.length; h++) {
+    const f = LX + spc * h;
+    for (let i = 0; i < a[0].length; i++) {
+      const j = TY + spc * i;
+      const k = dist(b, c, f, j);
+      const l = e ? pi(0.025) : pi(-0.025);
+      const m = l * sqrt(k / g);
+      a[h][i] += m;
     }
-    return j;
   }
+}
+
+// Function to calculate the flow values in a grid
+function flwP(a, b, c) {
+  const e = [];
+  for (let f = LX; f < RX; f += spc) {
+    const b = [];
+    for (let e, g = TY; g < BY; g += spc) {
+      e = a;
+      if (c) {
+        e = angle(f, g, w(0.5), h(0.4)) - pi(0.5);
+        const d = dist(f, g, w(0.5), h(0.5));
+        e += rscl(d, 0, w(1.5), 0, pi(1));
+      }
+      b.push(e);
+    }
+    e.push(b);
+  }
+
+  let f = 0, g = 0;
+  if (b === "none") {
+    f = 0;
+  } else if (b === "low") {
+    f = 15;
+    g = pi(0.1);
+  } else if (b === "med") {
+    f = 28;
+    g = pi(0.25);
+  } else {
+    f = 45;
+    g = pi(0.45);
+  }
+  if (c) {
+    f = 0;
+  }
+
+  for (let h = 0; h < f; h++) {
+    const a = rng(LX, RX);
+    const c = rng(TY, BY);
+    if (od(0.7)) {
+      const b = gssn(0, g);
+      const f = Math.max(w(0.1), Math.abs(gssn(w(0.35), w(0.15))));
+      adjFlw(e, a, c, f, b);
+    } else {
+      const f = od(0.5);
+      adjFlw2(e, a, c, f, b);
+    }
+  }
+  return e;
+}
+
+// Function to calculate the flow lines
+function flwL(a, b, c, e, f) {
+  const g = a.length;
+  const h = a[0].length;
+  const i = w(0.007);
+  const j = [];
+  for (let k = 0; k < b.length; k++) {
+    const l = [];
+    const m = Math.abs(gssn(c, 0.25 * c));
+    let n = b[k][0];
+    let o = b[k][1];
+    for (let b = 0; b < m; b++) {
+      l.push([n, o]);
+      const b = Math.floor((n - LX) / spc);
+      const c = Math.floor((o - TY) / spc);
+      let j = e;
+      if (0 <= c && c < h && 0 <= b && b < g) {
+        j = a[b][c];
+      }
+      if (f) {
+        j = snp(j, pi(0.2));
+      }
+      n += i * cos(j);
+      o += i * sin(j);
+    }
+    j.push(l);
+  }
+  return j;
+}
+
+
   function offset(a, b, c, e) {
     return [a + e * cos(c), b + e * sin(c)];
   }
@@ -420,6 +456,8 @@ const gssn = (a = 0, b = 1) => {
         (!j || dist(b, c, w(0.5), h(0.4)) > w(0.07)) && s.push([b, c]);
       }
     }
+
+
     s = shffl(s);
     const t = flwL(a, s, c, e, n);
     for (let q = 0; q < t.length; q++) {
@@ -491,11 +529,15 @@ const gssn = (a = 0, b = 1) => {
     }
     return p;
   }
+
   function lrp(a, b, c) {
+    // Linearly interpolate between a and b based on c
     return a * (1 - c) + b * c;
   }
+  
   function crvL(a) {
-    if (2 > a.length) return 0;
+    // Calculate the total length of a curve defined by points
+    if (a.length < 2) return 0;
     let b = 0;
     for (let c = 0; c < a.length - 1; c++) {
       const [e, f] = a[c],
@@ -504,15 +546,17 @@ const gssn = (a = 0, b = 1) => {
     }
     return b;
   }
+  
   function lerpCrv(a, b, c) {
+    // Interpolate a point on a curve defined by points based on t (b) and curve length (c)
     const e = a[0],
       f = a[a.length - 1];
-    if (0 >= b) return e;
-    if (1 <= b) return f;
-    if (2 === a.length) {
-      const a = lrp(e[0], f[0], b),
-        c = lrp(e[1], f[1], b);
-      return [a, c];
+    if (b <= 0) return e;
+    if (b >= 1) return f;
+    if (a.length === 2) {
+      const x = lrp(e[0], f[0], b),
+        y = lrp(e[1], f[1], b);
+      return [x, y];
     }
     const g = c * b;
     let h = 0;
@@ -532,7 +576,9 @@ const gssn = (a = 0, b = 1) => {
     }
     return f;
   }
+  
   function wc(a) {
+    // Weighted choice from an array of values
     const b = rnd();
     let c = 0;
     for (let e = 0; e < a.length - 1; e += 2) {
@@ -542,33 +588,43 @@ const gssn = (a = 0, b = 1) => {
     }
     return a[a.length - 2];
   }
+  
   function strokeSegment(a, b, c, e) {
-    stroke(a[0], a[1], a[2]), noFill(), swght(w(0.001));
-    const f = b / w(4e-4),
-      g = rng(0, 1e4);
+    // Stroke a segment of a curve
+    stroke(a[0], a[1], a[2]);
+    noFill();
+    swght(w(0.001));
+    const f = b / w(4e-4);
+    const g = rng(0, 1e4);
     for (let h, i = 0; i < f; i += 1) {
-      (h = i / f), beginShape();
-      let a = 0.013 * (1 - c / w(1)),
-        b = gssn(2 * a, a),
-        j = gssn(1 - 2 * a, a);
+      (h = i / f);
+      beginShape();
+      let a = 0.013 * (1 - c / w(1));
+      let b = gssn(2 * a, a);
+      let j = gssn(1 - 2 * a, a);
       for (let a = b; a < j; a += 0.01) {
-        let b = noise(4 * (a * (c / w(0.25))) + g, 1.5 * h),
-          f = h + 0.15 * (0.5 - b);
+        let b = noise(4 * (a * (c / w(0.25))) + g, 1.5 * h);
+        let f = h + 0.15 * (0.5 - b);
         const [i, j] = e(a, f);
         vrtx(i, j);
       }
       endShape();
     }
   }
+  
+
+
   function fSeg(a, b, c, e, f, g, h, i) {
-    fill(a[0], a[1], a[2]),
-      b
-        ? (stroke(0, 0, 10), swght(w(0.001)))
-        : (stroke(a[0], a[1], a[2]), swght(w(5e-4)));
-    const j = [],
-      k = [];
+    // Draw a filled segment of a curve
+    fill(a[0], a[1], a[2]);
+    b
+      ? (stroke(0, 0, 10), swght(w(0.001)))
+      : (stroke(a[0], a[1], a[2]), swght(w(5e-4)));
+    const j = [];
+    const k = [];
     for (let l = f; l < g; l += 0.01) j.push(l), k.unshift(l);
-    j.push(g), beginShape();
+    j.push(g);
+    beginShape();
     for (const k of j) {
       const [a, b] = lerpCrv(c, k, h);
       vrtx(a, b);
@@ -580,15 +636,19 @@ const gssn = (a = 0, b = 1) => {
     }
     endShape(CLOSE);
   }
+  
   function pm1() {
     return z1;
   }
+  
   function pm2() {
     return wc([z0, 0.15, z1, 0.25, z2, 0.35, z3, 0.2, z4, 0.05]);
   }
+  
   function pm3() {
     return wc([z1, 0.1, z2, 0.2, z3, 0.2, z4, 0.3, z5, 0.12, z6, 0.08]);
   }
+  
   function pm4() {
     return wc([
       z1,
@@ -607,16 +667,21 @@ const gssn = (a = 0, b = 1) => {
       0.07,
     ]);
   }
+  
   function pm5() {
     return wc([z3, 0.05, z4, 0.2, z5, 0.35, z6, 0.3, z7, 0.1]);
   }
+  
   function pm6() {
     return wc([z5, 0.2, z6, 0.5, z7, 0.3]);
   }
+  
   function pm7() {
     return z4;
   }
+  
   function pSL(a) {
+    // Determine the stroke length based on the complexity level
     const b = wc([w(0.002), 0.15, w(0.004), 0.4, w(0.008), 0.3, w(0.016), 0.15]);
     return a === V1
       ? 0.5 * b
@@ -628,11 +693,19 @@ const gssn = (a = 0, b = 1) => {
       ? 2.5 * b
       : b;
   }
+  
   function pNStps(a, b) {
+    // Determine the number of steps for noise generation based on the complexity level
     return b
       ? 16
-      : Math.min(1 / a, wc([0, 0.2, 1, 0.1, 2, 0.15, 4, 0.4, 8, 0.12, 16, 0.03]));
+      : Math.min(
+          1 / a,
+          wc([0, 0.2, 1, 0.1, 2, 0.15, 4, 0.4, 8, 0.12, 16, 0.03])
+        );
   }
+  
+
+
   const wht = [40, 2, 98],
     dRed = [358, 64, 86],
     red = [358, 80, 82],
