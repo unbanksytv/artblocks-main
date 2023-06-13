@@ -706,159 +706,191 @@ function flwL(a, b, c, e, f) {
   
 
 
-  const wht = [40, 2, 98],
-    dRed = [358, 64, 86],
-    red = [358, 80, 82],
-    tan = [25, 40, 88],
-    midTan = [25, 40, 60],
-    orng = [25, 78, 90],
-    pOrng = [25, 68, 93],
-    pYllw = [43, 60, 99],
-    yllw = [43, 90, 99],
-    pnk = [11, 35, 97],
-    pPnk = [12, 18, 97],
-    xGrn = [125, 55, 55],
-    grn = [170, 75, 65],
-    pGrn = [170, 35, 80],
-    ppGrn = [160, 15, 85],
-    pppGrn = [160, 10, 90],
-    ppYllwGrn = [125, 12, 90],
-    ppBlue = [200, 15, 90],
-    pBlue = [200, 35, 75],
-    blue = [210, 65, 55],
-    dBlue = [220, 65, 35],
-    ddBlue = [225, 65, 20],
-    bgrndDBlue = [225, 60, 25],
-    paleIndigo = [220, 35, 75],
-    lavender = [260, 14, 88],
-    pBrwn = [28, 42, 39],
-    brwn = [25, 45, 33],
-    dBrwn = [25, 45, 23],
-    ddBrwn = [25, 45, 13],
-    nwsprnt = [40, 12, 88],
-    bgrndNws = [40, 8, 92],
-    blk = [0, 0, 10],
-    pbcDefault = function () {
-      return bgrndNws;
-    },
-    pcLx = function () {
-      return wc([
-        dRed,
-        0.05,
-        red,
-        0.03,
-        nwsprnt,
-        0.12,
-        orng,
-        0.02,
-        pYllw,
-        0.06,
-        yllw,
-        0.06,
-        pnk,
-        0.03,
-        grn,
-        0.04,
-        ppGrn,
-        0.18,
-        ddBlue,
-        0.02,
-        dBlue,
-        0.05,
-        blue,
-        0.05,
-        pBlue,
-        0.03,
-        brwn,
-        0.17,
-        dBrwn,
-        0.09,
-        ddBrwn,
-        0.03,
-      ]);
-    },
-    pcLxD1 = function () {
-      return wc([
-        dRed,
-        0.1,
-        pYllw,
-        0.08,
-        pnk,
-        0.13,
-        grn,
-        0.2,
-        ppGrn,
-        0.16,
-        dBlue,
-        0.01,
-        blue,
-        0.24,
-        pBlue,
-        0.1,
-        brwn,
-        0.02,
-      ]);
-    },
-    pcLxD2 = function () {
-      return wc([
-        dRed,
-        0.12,
-        red,
-        0.1,
-        nwsprnt,
-        0.04,
-        orng,
-        0.05,
-        pYllw,
-        0.1,
-        yllw,
-        0.14,
-        pnk,
-        0.11,
-        grn,
-        0.13,
-        ppGrn,
-        0.05,
-        dBlue,
-        0.01,
-        blue,
-        0.12,
-        pBlue,
-        0.05,
-      ]);
-    },
-    makeLxD = function () {
-      const a = [],
-        b = [
-          0.6,
-          0.12,
-          0.1,
-          0.05,
-          0.03,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-          0.01,
-        ];
-      for (let c, e = 0; 15 > e; e++) {
-        if (((c = null), 0 == e)) c = pcLxD1();
-        else if (1 === e) {
-          let a = c;
-          for (; a === c; ) a = pcLxD2();
-          c = a;
-        } else c = pcLx();
-        a.push(c), a.push(b[e]);
-      }
-      return function () {
-        return wc(a);
-      };
-    },
+// RGB color values
+const wht = [40, 2, 98];
+const dRed = [358, 64, 86];
+const red = [358, 80, 82];
+const tan = [25, 40, 88];
+const midTan = [25, 40, 60];
+const orng = [25, 78, 90];
+const pOrng = [25, 68, 93];
+const pYllw = [43, 60, 99];
+const yllw = [43, 90, 99];
+const pnk = [11, 35, 97];
+const pPnk = [12, 18, 97];
+const xGrn = [125, 55, 55];
+const grn = [170, 75, 65];
+const pGrn = [170, 35, 80];
+const ppGrn = [160, 15, 85];
+const pppGrn = [160, 10, 90];
+const ppYllwGrn = [125, 12, 90];
+const ppBlue = [200, 15, 90];
+const pBlue = [200, 35, 75];
+const blue = [210, 65, 55];
+const dBlue = [220, 65, 35];
+const ddBlue = [225, 65, 20];
+const bgrndDBlue = [225, 60, 25];
+const paleIndigo = [220, 35, 75];
+const lavender = [260, 14, 88];
+const pBrwn = [28, 42, 39];
+const brwn = [25, 45, 33];
+const dBrwn = [25, 45, 23];
+const ddBrwn = [25, 45, 13];
+const nwsprnt = [40, 12, 88];
+const bgrndNws = [40, 8, 92];
+const blk = [0, 0, 10];
+
+// Function to create color variants
+function createColorVariant(baseColor, variant) {
+  const variantColor = [...baseColor];
+  for (let i = 0; i < 3; i++) {
+    variantColor[i] += variant;
+    if (variantColor[i] < 0) {
+      variantColor[i] = 0;
+    } else if (variantColor[i] > 255) {
+      variantColor[i] = 255;
+    }
+  }
+  return variantColor;
+}
+
+// Example usage:
+const whtLighter = createColorVariant(wht, 20); // Creates a lighter variant of wht color
+const redDarker = createColorVariant(red, -30); // Creates a darker variant of red color
+
+
+// Color functions with variants
+const pcLx = function () {
+  // Pastel color palette
+  return wc([
+    dRed,
+    0.05,
+    red,
+    0.03,
+    nwsprnt,
+    0.12,
+    orng,
+    0.02,
+    pYllw,
+    0.06,
+    yllw,
+    0.06,
+    pnk,
+    0.03,
+    grn,
+    0.04,
+    ppGrn,
+    0.18,
+    ddBlue,
+    0.02,
+    dBlue,
+    0.05,
+    blue,
+    0.05,
+    pBlue,
+    0.03,
+    brwn,
+    0.17,
+    dBrwn,
+    0.09,
+    ddBrwn,
+    0.03,
+  ]);
+};
+
+// Color function pcLxD1
+const pcLxD1 = function () {
+  return wc([
+    dRed,
+    0.1,
+    pYllw,
+    0.08,
+    pnk,
+    0.13,
+    grn,
+    0.2,
+    ppGrn,
+    0.16,
+    dBlue,
+    0.01,
+    blue,
+    0.24,
+    pBlue,
+    0.1,
+    brwn,
+    0.02,
+  ]);
+};
+
+
+// Color function pcLxD2
+const pcLxD2 = function () {
+  return wc([
+    dRed,
+    0.12,
+    red,
+    0.1,
+    nwsprnt,
+    0.04,
+    orng,
+    0.05,
+    pYllw,
+    0.1,
+    yllw,
+    0.14,
+    pnk,
+    0.11,
+    grn,
+    0.13,
+    ppGrn,
+    0.05,
+    dBlue,
+    0.01,
+    blue,
+    0.12,
+    pBlue,
+    0.05,
+  ]);
+};
+
+// Create a color generator function with variable variants
+const makeLxD = function () {
+  // Array to store color variants
+  const colorVariants = [];
+  
+  // Array of variant weights
+  const variantWeights = [
+    0.6, 0.12, 0.1, 0.05, 0.03, 0.01, 0.01, 0.01,
+    0.01, 0.01, 0.01, 0.01, 0.01, 0.01, 0.01
+  ];
+
+  for (let index = 0; index < 15; index++) {
+    let colorVariant;
+    
+    // Generate the first variant using pcLxD1()
+    if (index === 0) {
+      colorVariant = pcLxD1();
+    }
+    // Generate the second variant using pcLxD2()
+    else if (index === 1) {
+      colorVariant = pcLxD2();
+    }
+    // Generate other variants using pcLx()
+    else {
+      colorVariant = pcLx();
+    }
+
+    // Push the color variant and its weight to the array
+    colorVariants.push(colorVariant, variantWeights[index]);
+  }
+
+  // Return a function that generates a random color from the color variants
+  return function () {
+    return wc(colorVariants);
+  };
+};
+
+
     pbcLx = function (a) {
       return a >= V6
         ? wc([
@@ -1151,6 +1183,8 @@ function flwL(a, b, c, e, f) {
       for (; g === b; ) g = a();
       return g;
     };
+
+
   function draw() {
     noLoop(), background(40, 10, 90);
     let a = wc([
